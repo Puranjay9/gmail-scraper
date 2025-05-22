@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: app@123user
+      POSTGRES_DB: appdatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://appuser:app@123user@db:5432/appdatabase  
+      JWT_SECRET: "long@344ass#22*7(222secret^motherfucker77for55ur88mama"
+      JWT_EXPIRES_IN: "7d"
+      
+volumes:
+  postgres-data:      
